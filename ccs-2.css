@@ -2667,29 +2667,15 @@ main {
 }
 
 /* ---------- Portada ----------
-   Las flores son una franja independiente dentro de la portada.
-   La foto queda debajo, separada por el fondo lavanda.
+   La foto ocupa toda la portada. Las flores van SUPERPUESTAS sobre la foto,
+   como imagen COMPLETA (sin recortar): una franja pegada arriba del todo
+   y otra pegada abajo del todo, justo antes de que la foto termine.
+   Así funcionan como división visual hacia la siguiente sección sin ser
+   una sección propia (no ocupan espacio aparte, no tienen fondo propio).
 */
 .hero-wrapper {
     background: #e4d6f0 !important;
     overflow: hidden !important;
-}
-
-.floral-divider {
-    width: 100% !important;
-    height: 92px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    background: #e4d6f0 !important;
-    overflow: hidden !important;
-}
-
-.floral-divider img {
-    display: block !important;
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    object-position: center !important;
 }
 
 .hero-container {
@@ -2710,6 +2696,7 @@ main {
     padding: 0 !important;
     overflow: hidden !important;
     border-radius: 0 !important;
+    position: relative !important;
 }
 
 .hero-left-bg {
@@ -2721,19 +2708,60 @@ main {
     background-repeat: no-repeat !important;
 }
 
+/* Ya no se usan pseudo-elementos recortados para las flores */
 .hero-left::before,
 .hero-left::after {
     display: none !important;
     content: none !important;
 }
 
+/* Las flores: se usa la imagen real (<img>), COMPLETA y sin recortar,
+   superpuesta sobre la foto de la portada. */
+.floral-divider {
+    position: absolute !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    overflow: visible !important;
+    z-index: 6 !important;
+    pointer-events: none !important;
+    line-height: 0 !important;
+}
+
+.floral-divider--hero-top {
+    top: 0 !important;
+}
+
+.floral-divider--hero-bottom {
+    bottom: 0 !important;
+}
+
+.floral-divider img {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;   /* nunca se recorta: se ve la imagen completa */
+    max-width: 100% !important;
+    object-fit: initial !important;
+}
+
+.floral-divider--hero-bottom img {
+    transform: rotate(180deg) !important;
+}
+
 /* ---------- Carrusel: foto tipo impresión antigua ---------- */
+.carousel-item,
+.carousel-item img {
+    background: #8f70b5 !important;
+}
+
 .carousel-item {
     border: 3px solid #8f70b5 !important;
     border-bottom-width: 34px !important;
     border-radius: 2px !important;
     box-sizing: border-box !important;
-    background: #ffffff !important;
 }
 
 .carousel-item img {
@@ -2741,93 +2769,12 @@ main {
     height: 100% !important;
     object-fit: contain !important;
     object-position: center !important;
-    background: #ffffff !important;
     border: 0 !important;
 }
 
 @media (max-width: 768px) {
-    .hero-wrapper,
-    .page-shell {
-        width: calc(100% - 24px) !important;
-        max-width: 730px !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-    }
-
-    .site-container {
-        width: 100% !important;
-        max-width: 730px !important;
-        padding-left: 0 !important;
-        padding-right: 0 !important;
-    }
-
-    .hero-container {
-        padding: 10px !important;
-    }
-
-    .hero-split.hero-split--single,
-    .hero-left {
-        height: 650px !important;
-        min-height: 650px !important;
-    }
-
-    .floral-divider {
-        height: 82px !important;
-    }
-
-    .carousel-item {
-        height: min(78vw, 390px) !important;
-        padding: 8px 8px 38px !important;
-        border-width: 3px !important;
-        border-bottom-width: 30px !important;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero-wrapper,
-    .page-shell {
-        width: calc(100% - 20px) !important;
-    }
-
-    .hero-container {
-        padding: 8px !important;
-    }
-
-    .hero-split.hero-split--single,
-    .hero-left {
-        height: 620px !important;
-        min-height: 620px !important;
-    }
-
-    .floral-divider {
-        height: 72px !important;
-    }
-
-    .carousel-item {
-        height: 340px !important;
-        padding: 7px 7px 36px !important;
-        border-width: 3px !important;
-        border-bottom-width: 28px !important;
-    }
-}
-
-/* ==========================================================
-   AJUSTE FINAL MÓVIL: PANTALLA COMPLETA SIN BORDES,
-   FLORES SUPERPUESTAS SOBRE LA FOTO DE PORTADA
-   Y MARCO DEL CARRUSEL EN MORADO (sin relleno blanco)
-   ========================================================== */
-
-/* El marco del carrusel deja de tener relleno blanco: todo el marco
-   (el borde y el fondo que queda detrás de la foto cuando no lo cubre
-   por completo) pasa a ser del mismo morado del borde. */
-.carousel-item,
-.carousel-item img {
-    background: #8f70b5 !important;
-}
-
-@media (max-width: 768px) {
-    /* La página ocupa el 100% del ancho de la pantalla, sin margen
-       lateral ni "borde" alrededor de la invitación. */
+    /* La página ocupa el 100% del ancho, sin margen ni "borde" alrededor
+       de la invitación: las flores quedan pegadas al borde de la pantalla. */
     .hero-wrapper,
     .page-shell {
         width: 100% !important;
@@ -2844,102 +2791,31 @@ main {
         padding: 0 !important;
     }
 
-    /* Se ocultan las franjas de flores independientes: en su lugar las
-       flores quedan superpuestas directamente sobre la fotografía,
-       pegadas arriba del todo y justo antes de que termine la foto,
-       igual que en la imagen de referencia. */
-    .floral-divider--hero-top,
-    .floral-divider--hero-bottom {
-        display: none !important;
+    .hero-split.hero-split--single,
+    .hero-left {
+        height: 650px !important;
+        min-height: 650px !important;
     }
 
-    .hero-left::before,
-    .hero-left::after {
-        display: block !important;
-        content: "" !important;
-        position: absolute !important;
-        left: 0 !important;
-        width: 100% !important;
-        height: 70px !important;
-        background-image: url('floral-divider.png') !important;
-        background-repeat: no-repeat !important;
-        background-position: center center !important;
-        background-size: 100% auto !important;
-        z-index: 5 !important;
-        pointer-events: none !important;
-    }
-
-    .hero-left::before {
-        top: 0 !important;
-    }
-
-    .hero-left::after {
-        bottom: 0 !important;
-        transform: rotate(180deg) !important;
+    .carousel-item {
+        height: min(78vw, 390px) !important;
+        padding: 8px 8px 38px !important;
+        border-width: 3px !important;
+        border-bottom-width: 30px !important;
     }
 }
 
 @media (max-width: 480px) {
-    .hero-wrapper,
-    .page-shell {
-        width: 100% !important;
+    .hero-split.hero-split--single,
+    .hero-left {
+        height: 620px !important;
+        min-height: 620px !important;
     }
 
-    .hero-left::before,
-    .hero-left::after {
-        height: 56px !important;
-    }
-}
-
-/* ==========================================================
-   FLORES SUPERPUESTAS SOBRE LA FOTO DE PORTADA (todos los anchos)
-   Arriba: pegadas al borde superior, lo primero que se ve.
-   Abajo: montadas sobre la foto justo antes de que esta termine,
-   como una franja decorativa que "divide" visualmente la portada
-   del resto de la página (igual que en la imagen de referencia).
-   ========================================================== */
-
-/* Las franjas de flores independientes (fuera de la foto) ya no se usan */
-.floral-divider--hero-top,
-.floral-divider--hero-bottom {
-    display: none !important;
-}
-
-.hero-left::before,
-.hero-left::after {
-    display: block !important;
-    content: "" !important;
-    position: absolute !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 140px !important;
-    background-image: url('floral-divider.png') !important;
-    background-repeat: no-repeat !important;
-    background-position: center center !important;
-    background-size: 100% auto !important;
-    z-index: 5 !important;
-    pointer-events: none !important;
-}
-
-.hero-left::before {
-    top: 0 !important;
-}
-
-.hero-left::after {
-    bottom: 0 !important;
-    transform: rotate(180deg) !important;
-}
-
-@media (max-width: 768px) {
-    .hero-left::before,
-    .hero-left::after {
-        height: 100px !important;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero-left::before,
-    .hero-left::after {
-        height: 80px !important;
+    .carousel-item {
+        height: 340px !important;
+        padding: 7px 7px 36px !important;
+        border-width: 3px !important;
+        border-bottom-width: 28px !important;
     }
 }
