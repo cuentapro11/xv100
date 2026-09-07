@@ -1,343 +1,2102 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-    <title>Florencia - Mis XV años</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="image" href="foto0.jpeg" imagesizes="100vw">
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="ccs-2.css?v=force-20260907-01">
-    <script src="https://cdn.lordicon.com/lordicon.js"></script>
-</head>
-<body>
-    <!-- Modal de Bienvenida -->
-    <div id="welcomeModal" class="modal-overlay">
-        <div class="modal-content welcome-hero">
-            <div class="welcome-date">15.06.2022</div>
-            <h1 class="welcome-heading">Bienvenidos a la invitación de<br class="welcome-break" />
-                <span class="names">Florencia</span>
-            </h1>
-            <p class="welcome-subtitle">La música de fondo es parte de la experiencia</p>
-            <div class="modal-buttons">
-                <button id="enterWithMusic" class="btn-wedding">Ingresar con música</button>
-                <button id="enterWithoutMusic" class="btn-wedding" style="background:linear-gradient(135deg, hsl(var(--gold-dark)), hsl(var(--gold)));">Ingresar sin música</button>
-            </div>
-        </div>
-    </div>
+/* Variables CSS */
+:root {
+    --background: 0 0% 96%;
+    --foreground: 30 15% 18%;
+    --primary: 0 60% 38%;
+    --primary-foreground: 0 0% 96%;
+    --gold: 0 58% 42%;
+    --gold-light: 0 45% 90%;
+    --gold-dark: 0 62% 34%;
+    --brown: 0 68% 28%;
+    --brown-light: 0 40% 93%;
+    --brown-dark: 0 72% 20%;
+    --cream: 0 0% 98%;
+    --warm-white: 33 26% 93%;
+    --shadow-elegant: 0 10px 30px -10px hsl(0 60% 38% / 0.28);
+    --shadow-gold: 0 4px 20px hsl(0 58% 42% / 0.22);
+    /* Nuevo tono para laterales tipo papel (blanco piedra) */
+    --paper-side: 0 0% 97%;
+}
 
-    <!-- Reproductor de música -->
-    <div id="musicPlayer" class="music-player" style="display: none;">
-        <button id="musicToggle" class="music-button animated-volume" title="Reproducir/Pausar música">
-            <svg id="volumeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <defs>
-                    <linearGradient id="volumeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:#1abc9c;stop-opacity:1" />
-                        <stop offset="50%" style="stop-color:#16a085;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#27ae60;stop-opacity:1" />
-                    </linearGradient>
-                </defs>
-                <!-- Altavoz -->
-                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" 
-                         fill="url(#volumeGradient)" stroke="url(#volumeGradient)" class="speaker">
-                    <animateTransform attributeName="transform" type="scale" 
-                        values="1;1.1;1" dur="2s" repeatCount="indefinite"/>
-                </polygon>
-                
-                <!-- Ondas sonoras animadas -->
-                <path d="M19.07 4.93a10 10 0 0 1 0 14.14" 
-                      stroke="url(#volumeGradient)" stroke-width="2" fill="none" opacity="0" class="sound-wave-outer">
-                    <animate attributeName="opacity" values="0;1;0" dur="1.5s" repeatCount="indefinite" begin="0s"/>
-                    <animate attributeName="stroke-width" values="1.5;2.5;1.5" dur="1.5s" repeatCount="indefinite" begin="0s"/>
-                </path>
-                <path d="M15.54 8.46a5 5 0 0 1 0 7.08" 
-                      stroke="url(#volumeGradient)" stroke-width="2" fill="none" opacity="0" class="sound-wave-inner">
-                    <animate attributeName="opacity" values="0;1;0" dur="1.5s" repeatCount="indefinite" begin="0.5s"/>
-                    <animate attributeName="stroke-width" values="1.5;2.5;1.5" dur="1.5s" repeatCount="indefinite" begin="0.5s"/>
-                </path>
-                
-                <!-- Partículas de sonido -->
-                <circle cx="13" cy="8" r="0.5" fill="#1abc9c" opacity="0" class="sound-particle">
-                    <animate attributeName="opacity" values="0;1;0" dur="1s" repeatCount="indefinite" begin="0s"/>
-                    <animateTransform attributeName="transform" type="translate" values="0,0;3,-2" dur="1s" repeatCount="indefinite" begin="0s"/>
-                </circle>
-                <circle cx="13" cy="16" r="0.5" fill="#16a085" opacity="0" class="sound-particle">
-                    <animate attributeName="opacity" values="0;1;0" dur="1.2s" repeatCount="indefinite" begin="0.3s"/>
-                    <animateTransform attributeName="transform" type="translate" values="0,0;3,2" dur="1.2s" repeatCount="indefinite" begin="0.3s"/>
-                </circle>
-                <circle cx="13" cy="12" r="0.8" fill="#27ae60" opacity="0" class="sound-particle">
-                    <animate attributeName="opacity" values="0;1;0" dur="0.8s" repeatCount="indefinite" begin="0.6s"/>
-                    <animateTransform attributeName="transform" type="translate" values="0,0;4,0" dur="0.8s" repeatCount="indefinite" begin="0.6s"/>
-                </circle>
-            </svg>
-        </button>
-        <div id="youtube-player" style="position: absolute; top: -9999px; left: -9999px; width: 1px; height: 1px; opacity: 0; pointer-events: none;"></div>
-    </div>
-    
-    <main>
-    <!-- Hero Section dividida 50/50 -->
-    <div class="hero-wrapper">
-        <div class="site-container hero-container">
-            <div class="hero-split hero-split--single">
-                <!-- Portada única con imagen y efecto scroll -->
-                <div class="hero-left">
-                    <div class="hero-left-bg"></div>
-                    <div class="hero-overlay"></div>
-                    <div class="hero-content">
-                        <div class="hero-text">
-                            <div class="date">15.06.2022</div>
-                            <h1 class="names">Florencia</h1>
-                            <div class="hero-xv-title">Mis XV años</div>
-                            <p class="quote">Te espero para compartir la alegría de esa noche que será para mí mágica,<br class="hero-message-break"> inolvidable y única.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Content -->
-    <div class="page-shell">
-        <div class="content">
-            <div class="site-container">
-            <!-- Countdown -->
-            <section class="countdown-section section-shadow-seam">
-                <h2 class="section-title">Falta</h2>
-                <div class="countdown-container">
-                    <div class="countdown-item">
-                        <div class="countdown-number" id="days">00</div>
-                        <div class="countdown-label">DÍAS</div>
-                    </div>
-                    <div class="countdown-separator">|</div>
-                    <div class="countdown-item">
-                        <div class="countdown-number" id="hours">00</div>
-                        <div class="countdown-label">HS</div>
-                    </div>
-                    <div class="countdown-separator">|</div>
-                    <div class="countdown-item">
-                        <div class="countdown-number" id="minutes">00</div>
-                        <div class="countdown-label">MIN</div>
-                    </div>
-                    <div class="countdown-separator">|</div>
-                    <div class="countdown-item">
-                        <div class="countdown-number" id="seconds">00</div>
-                        <div class="countdown-label">SEG</div>
-                    </div>
-                </div>
-                <div class="hero-quote-card">
-                    <p class="hero-quote-text">“Así que, no son ya más dos, sino una sola carne; por tanto, lo que Dios ha unido, no lo separe el hombre”</p>
-                    <p class="hero-quote-ref">Mateo 19:6</p>
-                </div>
-            </section>
+/* Contenedor centrado tipo tarjeta */
+.site-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 0.75rem;
+    background: transparent; /* fondo y sombra ahora los maneja page-shell */
+    box-shadow: none;
+}
 
-            <!-- Saludo para invitados (visible solo si la URL trae ?invitados= o ?familia=) -->
-            <section id="guestSection" class="guest-section" style="display:none;">
-                <div id="guestBadge" class="guest-badge">0</div>
-                <h2 class="guest-title">Invitados</h2>
-                <p id="guestSubtitle" class="guest-subtitle" style="display:none;"></p>
-                <div id="guestGreeting" class="guest-greeting"></div>
-                <p class="guest-closing">Tu presencia es lo más importante. ¡No faltes!</p>
-            </section>
+/* Contenedor envolvente para sombra continua a lo largo de toda la página */
+.page-shell {
+    max-width: 1100px;
+    margin: 0 auto;
+    background: #ffffff;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+}
 
-            <!-- Ceremony & Celebration -->
-            <section class="events-section section-shadow-seam ceremony-section">
-                <div class="events-container">
-            <!-- Ceremony -->
-                    <div class="event-card">
-                        <div class="event-icon animated-heart">
-                            <lord-icon
-                                src="https://cdn.lordicon.com/nvsfzbop.json"
-                                trigger="loop"
-                                state="morph-glitter"
-                                colors="primary:#8F70B5,secondary:#4B3E7A"
-                                style="width:250px;height:250px">
-                            </lord-icon>
-                        </div>
-                        <h3 class="event-title">Ceremonia</h3>
-                        <div class="event-details">
-                            <h4>Día</h4>
-                            <p>Sábado 28 de Noviembre - 5:00 PM</p>
-                        </div>
-                        <div class="event-details">
-                            <h4>Lugar</h4>
-                            <p>La Rambla Restaurante y Eventos</p>
-                            <p class="event-address">C/ Cesar Nicolás Penson, 157, La Esperilla - República Dominicana</p>
-                        </div>
-                        <button class="btn-wedding" onclick="window.open('https://maps.app.goo.gl/PrQRiexKK29VRMkc6', '_blank')">¿Cómo llegar?</button>
-                    </div>
-                </div>
-            </section>
+/* Animaciones de iconos modernos */
+.animated-heart {
+    transition: transform 0.3s ease;
+}
 
-            <!-- Photo Gallery -->
-            <section class="gallery-section section-shadow-seam">
-                <div class="deco-divider deco-divider--top"></div>
+.animated-heart:hover {
+    transform: scale(1.1);
+}
 
-                <div class="gallery-container">
-                    <h2 class="section-title">Retratos de Nuestro Amor</h2>
-                    <p class="section-subtitle">Un minuto, un segundo, un instante que queda en la eternidad</p>
-                    
-                    <div class="camera-icon animated-camera">
-                        <lord-icon
-                            src="https://cdn.lordicon.com/wsaaegar.json"
-                            trigger="loop"
-                            colors="primary:#8F70B5,secondary:#4B3E7A"
-                            style="width:190px;height:190px">
-                        </lord-icon>
-                    </div>
+.animated-heart .heart-path {
+    filter: drop-shadow(0 0 10px rgba(255, 107, 107, 0.6));
+}
 
-            <!-- Carrusel -->
-                    <div class="carousel-container">
-                        <button class="carousel-btn carousel-prev" id="prevBtn">❮</button>
-                        <div class="carousel-track-container">
-                            <div class="carousel-track" id="carouselTrack">
-                                <div class="carousel-item" aria-hidden="true">
-                                    <img src="foto10.jpeg" alt="" loading="lazy">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="foto1.jpeg" alt="Florencia - foto 1">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="foto2.jpeg" alt="Florencia - foto 2">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="foto3.jpeg" alt="Florencia - foto 3">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="foto4.jpeg" alt="Florencia - foto 4">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="foto5.jpeg" alt="Florencia - foto 5">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="foto6.jpeg" alt="Florencia - foto 6">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="foto7.jpeg" alt="Florencia - foto 7">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="foto8.jpeg" alt="Florencia - foto 8">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="foto9.jpeg" alt="Florencia - foto 9">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="foto10.jpeg" alt="Florencia - foto 10">
-                                </div>
-                                <div class="carousel-item" aria-hidden="true">
-                                    <img src="foto1.jpeg" alt="" loading="lazy">
-                                </div>
-                            </div>
-                        </div>
-                        <button class="carousel-btn carousel-next" id="nextBtn">❯</button>
-                    </div>
+.animated-celebration {
+    transition: transform 0.3s ease;
+}
 
-                    <div class="carousel-counter">
-                        <span id="currentSlide">1</span> / <span id="totalSlides">10</span> fotos
-                    </div>
-                </div>
+.animated-celebration:hover {
+    transform: scale(1.1);
+}
 
-                <div class="deco-divider deco-divider--bottom"></div>
-            </section>
+.animated-camera {
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
 
-            <!-- Party Information -->
-            <section class="party-section section-shadow-seam">
-                <div class="party-container">
-                    <h2 class="section-title">Fiesta</h2>
-                    <p class="section-subtitle">Hagamos juntos una fiesta épica. Aquí algunos detalles a tener en cuenta.</p>
+.animated-camera:hover {
+    transform: scale(1.1);
+}
 
-                    <div class="party-grid">
-                        <div class="party-card">
-                            <div class="party-icon animated-dresscode">
-                                <div class="tie-icon" aria-hidden="true">
-                                    <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                                        <g fill="#D5C3E3" stroke="#8F70B5" stroke-width="2">
-                                            <polygon points="24,8 40,8 46,18 32,22 18,18"/>
-                                            <path d="M32 22 L44 56 L32 62 L20 56 Z" fill="#8F70B5"/>
-                                        </g>
-                                    </svg>
-                                </div>
-                            </div>
-                            <h3 class="event-title">Código de Vestimenta</h3>
-                            <p>Formal. Por favor evita asistir con estos colores: vino tinto, malva, beige y blanco.</p>
-                            <button class="btn-wedding" onclick="showDressCode()">Ver más</button>
-                        </div>
-                        <div class="party-card">
-                            <div class="party-icon animated-clipboard">
-                                <lord-icon
-                                    src="https://cdn.lordicon.com/wsaaegar.json"
-                                    trigger="loop"
-                                    colors="primary:#8F70B5,secondary:#4B3E7A"
-                                    style="width:250px;height:250px">
-                                </lord-icon>
-                            </div>
-                            <h3 class="event-title">Comparte tus Fotos</h3>
-                            <p>Ayúdanos a capturar cada momento, sube las fotos que tomes durante la fiesta.</p>
-                            <button class="btn-wedding" onclick="sharePhotos()">Subir fotos</button>
-                        </div>
-                    </div>
-                </div>
-            </section>
+.animated-camera:active .flash-effect {
+    animation: cameraFlash 0.3s ease-in-out;
+}
 
-            <!-- Gifts & RSVP -->
-            <section class="gifts-section section-shadow-seam">
-                <div class="deco-divider deco-divider--top"></div>
+@keyframes cameraFlash {
+    0% { opacity: 0; r: 0; }
+    50% { opacity: 0.8; r: 12; }
+    100% { opacity: 0; r: 0; }
+}
 
-                <div class="gifts-container">
-                    <h2 class="section-title">Nuestro regalo es tu presencia</h2>
-                    <p class="section-subtitle">Nos sentimos muy afortunados en nuestras vidas y esperamos celebrar con ustedes. Si planeas hacernos un regalo, tenemos la siguiente opción.</p>
-                    <div class="gift-icon animated-gift">
-                        <lord-icon
-                            src="https://cdn.lordicon.com/kezeezyg.json"
-                            trigger="loop"
-                            colors="primary:#8F70B5,secondary:#4B3E7A"
-                            style="width:250px;height:250px">
-                        </lord-icon>
-                    </div>
-                    <button class="btn-wedding" onclick="openGiftLink()">Ver más</button>
-                </div>
+.animated-music {
+    transition: transform 0.3s ease;
+}
 
-                <div class="deco-divider deco-divider--bottom"></div>
-            </section>
+.animated-music:hover {
+    transform: scale(1.1) rotate(5deg);
+}
 
-            <section class="rsvp-section section-shadow-seam">
-                <div class="rsvp-container">
-                    <h2 class="section-title">Confirma tu asistencia</h2>
-                    <p class="section-subtitle">Por favor confirma tu asistencia antes del 15 de septiembre del 2026</p>
-                    <div class="whatsapp-icon animated-whatsapp">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                            <rect x="3" y="2" width="18" height="20" rx="2" fill="#7248B9"/>
-                            <rect x="6.5" y="6" width="11" height="1.6" rx="0.8" fill="#fff"/>
-                            <rect x="6.5" y="9.5" width="11" height="1.6" rx="0.8" fill="#fff"/>
-                            <rect x="6.5" y="13" width="7" height="1.6" rx="0.8" fill="#fff"/>
-                            <circle cx="17" cy="17" r="3.6" fill="#8F70B5"/>
-                            <path d="M15.4 17.1l1.1 1.1 2.1-2.2" stroke="#fff" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                        </svg>
-                    </div>
-                    <button class="btn-wedding" onclick="confirmAttendance()">Confirmar asistencia</button>
-                </div>
-            </section>
-            </div>
-        </div>
-    </div>
-    </main>
+.animated-dresscode {
+    transition: transform 0.3s ease;
+}
 
-    <!-- Toast notification -->
-    <div id="toast" class="toast">
-        <div id="toastContent"></div>
-    </div>
+.animated-dresscode:hover {
+    transform: scale(1.1);
+}
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <h3>Florencia</h3>
-            <p class="footer-date">15 de Junio de 2022</p>
-        </div>
-    </footer>
+.animated-clipboard {
+    transition: transform 0.3s ease;
+}
 
-    <script src="java2.js?v=force-20250902-01"></script>
-</body>
-</html>
+.animated-clipboard:hover {
+    transform: scale(1.1);
+}
+
+.animated-gift {
+    transition: transform 0.3s ease;
+}
+
+.animated-gift:hover {
+    transform: scale(1.1);
+}
+
+.animated-gift:hover .gift-lid {
+    animation: giftOpen 0.5s ease-in-out;
+}
+
+@keyframes giftOpen {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-3px) rotateX(10deg); }
+    100% { transform: translateY(0); }
+}
+
+.animated-whatsapp {
+    transition: transform 0.3s ease;
+}
+
+.animated-whatsapp:hover {
+    transform: scale(1.1);
+}
+
+.animated-volume {
+    transition: transform 0.3s ease;
+}
+
+.animated-volume:hover {
+    transform: scale(1.1);
+}
+
+/* Efectos globales para iconos */
+.event-icon, .party-icon, .gift-icon, .whatsapp-icon, .camera-icon, .modal-icon {
+    overflow: visible;
+    filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.1));
+}
+
+/* Mejoras de rendimiento */
+.animated-heart svg,
+.animated-celebration svg,
+.animated-camera svg,
+.animated-music svg,
+.animated-dresscode svg,
+.animated-clipboard svg,
+.animated-gift svg,
+.animated-whatsapp svg,
+.animated-volume svg {
+    will-change: transform;
+    backface-visibility: hidden;
+}
+
+/* Reset y base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: hsl(var(--cream)); /* igual que el fondo inferior */
+    color: hsl(var(--foreground));
+    line-height: 1.6;
+}
+
+/* Tipografía */
+.names {
+    font-family: 'Playfair Display', serif;
+}
+
+/* Modal de Bienvenida */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+.modal-content {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    box-shadow: var(--shadow-elegant);
+    border: 2px solid hsl(var(--gold) / 0.2);
+}
+
+/* En el modal de bienvenida, ocultar el recuadro y dejar solo el texto sobre el fondo borroso */
+.modal-overlay .modal-content {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    max-width: 860px;
+    width: min(92vw, 860px);
+    padding: clamp(2rem, 5vw, 3rem);
+}
+
+/* Bienvenida estilo hero de pantalla completa */
+.welcome-hero {
+    position: relative;
+    max-width: 860px;
+    width: min(92vw, 860px);
+    padding: clamp(2rem, 5vw, 3rem);
+    text-align: center;
+    color: hsl(var(--foreground));
+    background: transparent;
+    border: none;
+}
+
+/* Watermark de nombres en script detrás del contenido */
+.script-names {
+    position: absolute;
+    left: 50%;
+    top: 38%;
+    transform: translate(-50%, -50%);
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(2.75rem, 12vw, 8rem);
+    color: rgba(255, 255, 255, 0.95);
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+    text-shadow: 0 8px 18px rgba(0,0,0,0.08);
+    z-index: 0;
+}
+
+.welcome-date,
+.welcome-heading,
+.welcome-subtitle,
+.modal-buttons { position: relative; z-index: 1; }
+
+/* Ocultar marca de agua "Fede & Lore" del fondo en el modal */
+.modal-overlay .script-names { display: none; }
+
+.modal-overlay .welcome-hero::before {
+    content: "";
+    position: absolute;
+    inset: -40vh -10vw -40vh -10vw;
+    background-image: url('foto0.jpeg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.55;
+    z-index: -1;
+    filter: blur(15px);
+}
+
+.welcome-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 4vw, 2.4rem);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: hsl(var(--brown));
+    font-weight: 700;
+    margin: 0 auto 0.75rem;
+    max-width: 30ch;
+    white-space: normal;
+    word-break: normal;
+    text-wrap: balance;
+}
+
+/* Unificar tamaño dentro del título del modal */
+.welcome-heading .names,
+.welcome-heading .ampersand {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    letter-spacing: inherit;
+}
+
+/* Afinar el & dorado sin desalinear el texto */
+.welcome-heading .ampersand {
+    color: hsl(var(--gold));
+    padding: 0 0.15ch;
+}
+
+.welcome-date {
+    font-size: 0.95rem;
+    color: hsl(var(--foreground) / 0.7);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+}
+
+.welcome-subtitle {
+    color: hsl(var(--foreground) / 0.75);
+    margin-bottom: 1.25rem;
+}
+
+/* Sección: Saludo personalizado por invitado / familia (vía parámetro en la URL) */
+.guest-section {
+    text-align: center;
+    background-color: #ffffff;
+    border: 1px solid hsl(var(--gold) / 0.25);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    padding: 2.5rem 1.5rem;
+    width: 100%;
+    max-width: none;
+    margin: 1.5rem auto 0;
+}
+
+.guest-badge {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: #fff;
+    background: hsl(var(--brown-dark));
+}
+
+.guest-title {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3rem;
+    color: hsl(var(--brown));
+    margin-bottom: 0.25rem;
+    font-weight: 700;
+}
+
+.guest-subtitle {
+    color: hsl(var(--gold-dark));
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+}
+
+.guest-greeting {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    max-width: 24rem;
+    margin: 0 auto;
+}
+
+.guest-name {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: clamp(0.9rem, 2.2vw, 1.05rem);
+    padding: 0.5rem 1.1rem;
+    border-radius: 8px;
+    display: inline-flex;
+    width: auto;
+    color: hsl(var(--foreground));
+}
+
+/* Colores intercalados (fondo), tomados de la misma paleta dorado/marrón del sitio */
+.guest-name.color-1 { background: hsl(var(--brown) / 0.1); }
+.guest-name.color-2 { background: hsl(var(--gold-dark) / 0.12); }
+.guest-name.color-3 { background: hsl(var(--brown-dark) / 0.1); }
+.guest-name.color-4 { background: hsl(var(--gold) / 0.14); }
+
+.guest-closing {
+    margin-top: 1.5rem;
+    color: hsl(var(--foreground) / 0.7);
+    font-size: 0.95rem;
+}
+
+@media (max-width: 480px) {
+    .guest-section { padding: 2rem 1rem; }
+    .guest-title { font-size: 2.4rem; }
+}
+
+.modal-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 0.75rem;
+    justify-content: center;
+    align-items: center; /* evita que los botones se estiren */
+}
+
+@media (max-width: 640px) {
+    .modal-buttons { flex-direction: column; align-items: center; }
+    .modal-buttons .btn-wedding { width: auto; align-self: center; }
+}
+
+.modal-title {
+    font-size: 1.5rem;
+    color: hsl(var(--brown));
+    margin-bottom: 1rem;
+    font-family: 'Playfair Display', serif;
+}
+
+.modal-names {
+    font-size: 2rem;
+    font-family: 'Playfair Display', serif;
+    color: hsl(var(--brown));
+    margin-bottom: 1rem;
+}
+
+.modal-subtitle {
+    color: hsl(var(--foreground) / 0.7);
+    margin-bottom: 2rem;
+}
+
+.modal-icon {
+    width: 4rem;
+    height: 4rem;
+    margin: 0 auto 2rem;
+    padding: 1rem;
+    border-radius: 50%;
+    background-color: hsl(var(--gold) / 0.1);
+    border: 2px solid hsl(var(--gold));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: hsl(var(--gold));
+}
+
+
+
+.btn-outline {
+    padding: 0.75rem 2rem;
+    border-radius: 9999px;
+    border: 2px solid hsl(var(--brown) / 0.3);
+    background: transparent;
+    color: hsl(var(--brown));
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.btn-outline:hover {
+    background: hsl(var(--brown) / 0.1);
+    border-color: hsl(var(--brown));
+}
+
+/* Reproductor de música */
+.music-player {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1000;
+}
+
+.music-button {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    background: linear-gradient(135deg, hsl(var(--brown)), hsl(var(--gold)));
+    color: white;
+    cursor: pointer;
+    box-shadow: var(--shadow-elegant);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.music-button:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-gold);
+}
+
+/* Hero Section dividida 50/50 */
+.hero-wrapper {
+    position: relative;
+    z-index: 0;
+    padding: 0;
+}
+
+/* Para centrar la grilla de portada igual que el resto */
+.hero-container {
+    max-width: 1100px;
+    background: transparent;
+    box-shadow: none;
+}
+
+.hero-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 80vh; /* actualizado a 80vh */
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: none; /* la sombra viene del contenedor padre */
+    background: transparent; /* sin fondo para igualar el blanco */
+}
+
+/* Lado izquierdo: imagen fija con efecto scroll (parallax) */
+.hero-left {
+    position: relative;
+    display: block;
+    min-height: 60vh;
+    overflow: hidden;
+}
+
+.hero-left-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('foto0.jpeg');
+    background-size: cover;
+    background-position: center 25%;
+    background-repeat: no-repeat;
+    transform: translateY(0);
+    will-change: transform;
+}
+
+/* Portada única (un solo panel a todo el ancho, sin lado derecho) */
+.hero-split--single {
+    grid-template-columns: 1fr;
+}
+
+/* Versículo debajo del conteo regresivo, misma sección: solo texto rojo vino, sin contorno */
+.hero-quote-card {
+    width: min(88%, 640px);
+    margin: 2.5rem auto 0;
+    text-align: center;
+}
+
+.hero-quote-text {
+    font-family: 'Playfair Display', serif;
+    font-style: normal;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    font-size: clamp(0.95rem, 2.6vw, 1.35rem);
+    line-height: 1.5;
+    color: hsl(var(--brown-dark));
+    margin-bottom: 0.75rem;
+}
+
+.hero-quote-ref {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: clamp(0.75rem, 1.8vw, 0.95rem);
+    color: hsl(var(--brown-dark));
+}
+
+@media (max-width: 480px) {
+    .hero-quote-card { width: 92%; }
+}
+
+/* Image container for left hero image */
+.img-container {
+    width: 90%;
+    max-width: 600px;
+    border: 2px solid #ccc;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.img-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Lado derecho: sin efecto, solo imagen estática */
+.hero-right {
+    position: relative;
+    overflow: hidden;
+    background: hsl(var(--paper-side)); /* tono papel para rellenar sin dejar hueco visible */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-right img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+}
+
+/* El hero-left usa siempre background; en móvil cambiamos el attachment */
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.hero-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    padding: 1rem;
+}
+
+.hero-text {
+    max-width: 32rem;
+}
+
+.date {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    font-weight: 300;
+}
+
+.names {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+}
+
+.ampersand {
+    color: hsl(var(--gold));
+}
+
+.quote {
+    font-size: 1.25rem;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.scroll-indicator {
+    animation: bounce 2s infinite;
+}
+
+.scroll-mouse {
+    width: 1.5rem;
+    height: 2.5rem;
+    border: 2px solid white;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.scroll-wheel {
+    width: 0.25rem;
+    height: 0.75rem;
+    background: white;
+    border-radius: 0.125rem;
+    margin-top: 0.5rem;
+    animation: pulse 2s infinite;
+}
+
+/* Content */
+.content {
+    position: relative;
+    z-index: 1;
+    /* Ya no empuja 100vh completos porque la portada es 60vh */
+    margin-top: 0;
+    background: hsl(var(--cream));
+}
+
+/* Sections */
+.countdown-section,
+.events-section,
+.gallery-section,
+.party-section,
+.gifts-section,
+.rsvp-section {
+    padding: 4rem 1rem;
+}
+
+.gallery-section,
+.gifts-section {
+    background-color: hsl(var(--warm-white));
+}
+
+/* Alternancia de tonos: cada sección alterna blanco puro / blanco cálido,
+   para que la división entre secciones se note por el color de fondo
+   (además de la sombra), no por la línea decorativa. */
+.countdown-section {
+    background-color: hsl(var(--warm-white));
+}
+
+.events-section,
+.party-section,
+.rsvp-section {
+    background-color: #ffffff;
+}
+
+/* Línea de sombra en la costura: da la sensación de que la sección
+   está "por debajo" de las secciones vecinas (efecto de capas).
+   Aplicar esta clase a cualquier <section> para replicar el efecto. */
+.section-shadow-seam {
+    position: relative;
+    box-shadow:
+        inset 0 10px 18px -14px rgba(0, 0, 0, 0.22),
+        inset 0 -10px 18px -14px rgba(0, 0, 0, 0.22);
+}
+
+/* Variante solo arriba o solo abajo, por si no querés el efecto en ambos bordes */
+.section-shadow-seam-top {
+    box-shadow: inset 0 8px 16px -14px rgba(0, 0, 0, 0.16);
+}
+
+.section-shadow-seam-bottom {
+    box-shadow: inset 0 -8px 16px -14px rgba(0, 0, 0, 0.16);
+}
+
+/* Línea divisoria decorativa: trazo curvo fino que se desvanece en los
+   extremos + puntitos degradados, repetida horizontalmente.
+   Se usa SOLO en gallery-section y gifts-section, una vez arriba y una
+   vez abajo, pegada al borde de la sección (no al centro), separada
+   del contenido/texto por un margen generoso. La división real entre
+   secciones la dan la sombra (.section-shadow-seam) y el cambio de
+   tono de fondo, que ocurren en la costura, sin la línea. */
+.deco-divider {
+    width: 100%;
+    height: 20px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='190' height='20' viewBox='0 0 190 20'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='150' y2='0' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0%25' stop-color='%23A92D2D' stop-opacity='0'/%3E%3Cstop offset='25%25' stop-color='%23A92D2D' stop-opacity='0.85'/%3E%3Cstop offset='75%25' stop-color='%23A92D2D' stop-opacity='0.85'/%3E%3Cstop offset='100%25' stop-color='%23A92D2D' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M0,10 Q75,5 150,10' stroke='url(%23g)' stroke-width='0.9' fill='none'/%3E%3Ccircle cx='159' cy='9.6' r='0.7' fill='%23A92D2D' opacity='0.75'/%3E%3Ccircle cx='164' cy='9.3' r='1.3' fill='%23A92D2D' opacity='0.85'/%3E%3Ccircle cx='170' cy='9.8' r='0.6' fill='%23A92D2D' opacity='0.6'/%3E%3C/svg%3E");
+    background-repeat: round no-repeat;
+    background-position: center;
+    opacity: 0.7;
+}
+
+/* Pegada al borde superior de la sección, empuja el título/texto hacia abajo */
+.deco-divider--top {
+    margin-top: -2.25rem;
+    margin-bottom: 2.25rem;
+}
+
+/* Pegada al borde inferior de la sección, con espacio respecto al contenido de arriba */
+.deco-divider--bottom {
+    margin-top: 2.25rem;
+    margin-bottom: -2.25rem;
+}
+
+/* Countdown */
+.countdown-section {
+    text-align: center;
+    padding: 2.5rem 1rem;
+    width: 100%;
+    max-width: none;
+    margin: 0 auto;
+}
+
+.section-title {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3rem;
+    color: hsl(var(--brown));
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.countdown-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    max-width: none;
+    margin: 0 auto;
+    flex-wrap: nowrap; /* forzar una sola línea */
+}
+
+/* Ajuste responsivo para que quepa siempre en una línea */
+.countdown-section {
+	padding: 1.5rem 0.5rem;
+}
+
+.countdown-item { min-width: 0; }
+/* Countdown typography: more elegant and smooth */
+.countdown-number {
+	font-family: 'Playfair Display', serif;
+	font-weight: 500;
+	font-variant-numeric: lining-nums oldstyle-nums;
+	letter-spacing: -0.02em;
+	line-height: 1;
+	color: hsl(var(--foreground));
+	margin-bottom: 0.5rem;
+	display: block;
+}
+
+.countdown-label {
+	font-size: clamp(0.7rem, 2.5vw, 0.85rem);
+	color: hsl(var(--brown));
+	text-transform: uppercase;
+	letter-spacing: 0.18em;
+	opacity: 0.9;
+}
+
+.countdown-separator { color: hsl(var(--brown-light)); }
+
+/* Evitar ruptura en móviles muy pequeños */
+@media (max-width: 480px) {
+	.countdown-container { gap: 0.5rem; }
+}
+
+/* Remove strict lord-icon sizing to allow custom sizes */
+/* .event-icon lord-icon,
+.camera-icon lord-icon,
+.gift-icon lord-icon,
+.party-icon lord-icon {
+	width: 110px !important;
+	height: 110px !important;
+} */
+
+.event-icon,
+.camera-icon,
+.gift-icon,
+.party-icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* Enlarge event icon circle slightly for balance */
+.event-icon {
+	width: 7rem;
+	height: 7rem;
+	margin: 0 auto 1.25rem;
+	padding: 0.5rem;
+	border-radius: 50%;
+	background-color: hsl(var(--gold) / 0.1);
+	border: 2px solid hsl(var(--gold));
+	box-shadow: var(--shadow-elegant);
+}
+
+/* Corbata animada (dress code) */
+.tie-icon {
+	width: 110px;
+	height: 110px;
+	animation: tieFloat 3s ease-in-out infinite;
+}
+
+@keyframes tieFloat {
+	0% { transform: translateY(0) rotate(0deg); }
+	50% { transform: translateY(-4px) rotate(1deg); }
+	100% { transform: translateY(0) rotate(0deg); }
+}
+
+/* Events */
+.events-container {
+    max-width: 96rem;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 480px));
+    justify-content: center;
+    gap: 3rem;
+}
+
+.event-card {
+    text-align: center;
+}
+
+.event-icon {
+    width: 5rem;
+    height: 5rem;
+    margin: 0 auto 1.5rem;
+    padding: 1rem;
+    border-radius: 50%;
+    background-color: hsl(var(--gold) / 0.1);
+    border: 2px solid hsl(var(--gold));
+    box-shadow: var(--shadow-elegant);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: hsl(var(--gold));
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+    animation: gentle-pulse 2s ease-in-out infinite;
+}
+
+.celebration-icon {
+    display: flex;
+    gap: 0.25rem;
+}
+
+.glass {
+    width: 1.5rem;
+    height: 2rem;
+    background-color: hsl(var(--gold));
+    border-radius: 0.125rem;
+}
+
+.event-title {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2rem;
+    color: hsl(var(--brown));
+    margin-bottom: 1.5rem;
+}
+
+.event-details {
+    margin-bottom: 1.5rem;
+}
+
+.event-details h4 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: hsl(var(--brown-dark));
+    margin-bottom: 0.5rem;
+}
+
+.event-details p {
+    color: hsl(var(--foreground) / 0.7);
+}
+
+.event-address {
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+}
+
+/* Buttons */
+.btn-wedding {
+    padding: 0.75rem 2rem;
+    border-radius: 9999px;
+    border: none;
+    background: linear-gradient(135deg, hsl(var(--gold-dark)), hsl(var(--gold)));
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: var(--shadow-elegant);
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.btn-wedding:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: var(--shadow-gold);
+}
+
+/* Gallery */
+.gallery-container {
+    max-width: 64rem;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.section-subtitle {
+    color: hsl(var(--foreground) / 0.7);
+    margin-bottom: 3rem;
+}
+
+.camera-icon {
+    width: 3.5rem;
+    height: 3.5rem;
+    margin: 0 auto 1.75rem;
+    padding: 1rem;
+    border-radius: 50%;
+    background-color: hsl(var(--gold) / 0.1);
+    border: 2px solid hsl(var(--gold));
+    box-shadow: var(--shadow-elegant);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: hsl(var(--gold));
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+    animation: gentle-bounce 2s ease-in-out infinite;
+}
+
+/* Carrusel */
+.carousel-container {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto 2rem;
+}
+
+.carousel-track-container {
+    overflow: hidden;
+    border-radius: 0.5rem;
+    box-shadow: var(--shadow-elegant);
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-item {
+    flex: 0 0 100%;
+    height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    border: 1px solid hsl(var(--gold) / 0.15);
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* Marco que permite que la mayoría de cada foto encaje sin recortes forzados */
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: hsl(var(--brown));
+    box-shadow: var(--shadow-elegant);
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+.carousel-prev {
+    left: 10px;
+}
+
+.carousel-next {
+    right: 10px;
+}
+
+.carousel-btn:hover {
+    background: white;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-counter {
+    text-align: center;
+    color: hsl(var(--foreground) / 0.7);
+    font-size: 0.9rem;
+    margin-top: 1rem;
+}
+
+/* Party */
+.party-container {
+    max-width: 96rem;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.party-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.party-card {
+    padding: 2rem;
+    border: 2px solid hsl(var(--gold) / 0.2);
+    border-radius: 0.5rem;
+    background-color: hsl(var(--warm-white));
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.party-card:hover {
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+}
+
+.party-icon {
+    width: 6rem;
+    height: 6rem;
+    margin: 0 auto 1.5rem;
+    padding: 0.75rem;
+    border-radius: 50%;
+    background-color: hsl(var(--gold) / 0.1);
+    box-shadow: var(--shadow-elegant);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: hsl(var(--gold));
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+    animation: gentle-pulse 2s ease-in-out infinite;
+    overflow: hidden;
+}
+
+.party-icon .tie-icon,
+.party-icon lord-icon,
+.party-icon svg {
+	max-width: 100%;
+	max-height: 100%;
+	display: block;
+}
+
+.party-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: hsl(var(--brown));
+    margin-bottom: 1rem;
+}
+
+.party-card p {
+    color: hsl(var(--foreground) / 0.7);
+    margin-bottom: 1.5rem;
+}
+
+/* Gifts */
+.gifts-container,
+.rsvp-container {
+    max-width: 32rem;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.gift-icon,
+.whatsapp-icon {
+    width: 5rem;
+    height: 5rem;
+    margin: 0 auto 2rem;
+    padding: 1rem;
+    border-radius: 50%;
+    background-color: hsl(var(--gold) / 0.1);
+    border: 2px solid hsl(var(--gold));
+    box-shadow: var(--shadow-elegant);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: hsl(var(--gold));
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+    animation: gentle-bounce 2s ease-in-out infinite;
+}
+
+.whatsapp-icon {
+    animation: gentle-pulse 2s ease-in-out infinite;
+}
+
+/* RSVP */
+.rsvp-text {
+    margin-bottom: 1.75rem;
+}
+
+.rsvp-container .btn-wedding {
+    margin-top: 0.5rem;
+}
+
+/* Footer */
+.footer {
+    background-color: hsl(var(--brown));
+    color: white;
+    padding: 2rem 1rem;
+    text-align: center;
+}
+
+.footer-content h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    margin: 0.5rem 0;
+}
+
+.footer-date {
+    color: #000000;
+    font-size: 0.875rem;
+    margin-top: 1rem;
+}
+
+/* Toast */
+.toast {
+    position: fixed;
+    top: 5rem;
+    right: 1rem;
+    background: white;
+    border: 1px solid hsl(var(--gold));
+    border-radius: 0.5rem;
+    padding: 1rem;
+    box-shadow: var(--shadow-elegant);
+    z-index: 1000;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.3s ease;
+    max-width: 300px;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Animations */
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+@keyframes gentle-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes gentle-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+@keyframes flip-in {
+    0% { transform: rotateY(180deg); opacity: 0; }
+    100% { transform: rotateY(0); opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .hero-split { grid-template-columns: 1fr; height: auto; }
+    .hero-left { height: 60vh; min-height: 320px; }
+    .hero-right { height: auto; background: hsl(var(--paper-side)); }
+    .hero-right img { width: 100%; height: auto; object-fit: contain; object-position: center; display: block; }
+}
+
+@media (max-width: 768px) {
+    .names {
+        font-size: 3rem;
+    }
+    /* En móvil, eliminar laterales y usar fondo uniforme */
+    body { 
+        background-image: none; 
+        background-color: hsl(var(--warm-white)); 
+    }
+    /* El contenedor ocupa el 100% en móvil, sin borde/sombra */
+    .site-container { padding: 0; max-width: none; width: 100%; }
+    .page-shell { box-shadow: none; max-width: none; width: 100%; border: none; border-radius: 0; }
+    .hero-container { max-width: none; }
+    .hero-split { border-radius: 0; }
+
+    .section-title {
+        font-size: 2rem;
+    }
+    .countdown-number {
+        font-size: 3rem;
+    }
+    .countdown-container {
+        gap: 1.5rem;
+    }
+    .events-container {
+        grid-template-columns: 1fr;
+        gap: 4.5rem;
+    }
+    .party-grid {
+        grid-template-columns: 1fr;
+    }
+    .carousel-item {
+        height: 400px;
+    }
+    .carousel-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .names {
+        font-size: 2.5rem;
+    }
+    .quote {
+        font-size: 1rem;
+    }
+    .countdown-number {
+        font-size: 2.5rem;
+    }
+    .carousel-item {
+        height: 350px;
+    }
+    .modal-content {
+        padding: 1.5rem;
+    }
+    .modal-names {
+        font-size: 1.5rem;
+    }
+}
+
+/* Left side custom hero snippet */
+.hero {
+	position: relative;
+	width: 100%;
+	height: 100vh;
+	overflow: hidden;
+}
+
+.hero img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+	will-change: transform;
+	transition: transform 0.1s linear;
+}
+
+.texto {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+	color: white;
+	padding: 0 1rem;
+}
+
+.texto .fecha {
+	font-size: 1.25rem;
+	margin-bottom: 1rem;
+}
+
+.texto h1 {
+	font-family: 'Great Vibes', cursive;
+	font-size: 4rem;
+	font-weight: 400;
+	margin: 0.5rem 0 1rem;
+}
+
+.texto .frase {
+	font-style: italic;
+	font-size: 1.1rem;
+	line-height: 1.5;
+}
+
+/* (Duplicado de .camera-icon eliminado: la regla vigente está más arriba) */
+
+/* Mobile-specific hero heights */
+@media (max-width: 768px) {
+	.hero-split { height: auto; }
+	.hero { height: 55vh; }
+	.hero-left {
+		display: block;
+		height: auto;
+		aspect-ratio: 4 / 5;
+		min-height: 420px;
+	}
+	.hero-right { height: auto; background: hsl(var(--paper-side)); }
+	.hero-right img { width: 100%; height: auto; object-fit: contain; object-position: center; display: block; }
+    /* Desactivar attachment fijo en móvil por compatibilidad/performance */
+    .hero-left { background-attachment: scroll !important; }
+}
+
+/* Desktop-specific: (parallax por capa, ya no usamos background-attachment) */
+
+/* ==========================================================
+   REDISEÑO VISUAL — ESTILO LAVANDA / XV AÑOS
+   Mantiene la lógica y las funciones existentes.
+   ========================================================== */
+:root {
+    --background: 270 52% 96%;
+    --foreground: 255 29% 31%;
+    --primary: 255 32% 36%;
+    --primary-foreground: 0 0% 100%;
+    --gold: 271 44% 68%;
+    --gold-light: 271 48% 91%;
+    --gold-dark: 255 32% 36%;
+    --brown: 255 32% 36%;
+    --brown-light: 271 35% 84%;
+    --brown-dark: 255 34% 30%;
+    --cream: 270 52% 96%;
+    --warm-white: 0 0% 100%;
+    --paper-side: 270 52% 96%;
+    --shadow-elegant: 0 8px 24px rgba(75, 62, 122, 0.14);
+    --shadow-gold: 0 5px 16px rgba(75, 62, 122, 0.18);
+}
+
+html, body {
+    background: #f6effd;
+}
+
+body {
+    font-family: 'Playfair Display', serif;
+    color: #4b3e7a;
+}
+
+/* Columna central como la referencia */
+.site-container,
+.page-shell,
+.hero-container {
+    max-width: 730px;
+}
+
+.page-shell {
+    background: #ffffff;
+    box-shadow: 0 8px 26px rgba(75, 62, 122, 0.13);
+}
+
+.content {
+    background: #ffffff;
+}
+
+/* ---------- Portada ---------- */
+.hero-wrapper {
+    max-width: 730px;
+    margin: 0 auto;
+    background: #e4d6f0;
+}
+
+.hero-split {
+    height: 535px;
+    border-radius: 0;
+    overflow: visible;
+    background: #e4d6f0;
+}
+
+.hero-left {
+    min-height: 535px;
+    overflow: visible;
+    position: relative;
+    isolation: isolate;
+}
+
+.hero-left-bg {
+    inset: 0;
+    background-position: center center;
+}
+
+.hero-overlay {
+    background: rgba(64, 43, 91, 0.30);
+    z-index: 1;
+}
+
+/* Flores arriba y abajo de la portada */
+.hero-left::before,
+.hero-left::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 78px;
+    background-image: url('floral-divider.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100% auto;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.hero-left::before { top: -1px; }
+.hero-left::after { bottom: -1px; transform: rotate(180deg); }
+
+/* Texto de portada de la referencia */
+.welcome-hero {
+    color: #4b3e7a;
+}
+
+.modal-overlay {
+    background: rgba(228, 214, 240, 0.90);
+}
+
+.modal-overlay .welcome-hero::before {
+    opacity: 0.25;
+    filter: blur(18px);
+}
+
+.welcome-date {
+    font-family: 'Playfair Display', serif;
+    color: #ffffff;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    text-transform: none;
+    margin-bottom: 0.7rem;
+}
+
+.welcome-heading {
+    font-family: 'Playfair Display', serif;
+    color: #ffffff;
+    font-size: clamp(2.7rem, 6vw, 3.8rem);
+    font-weight: 400;
+    letter-spacing: 0;
+    border-top: 1px solid rgba(255,255,255,.78);
+    border-bottom: 1px solid rgba(255,255,255,.78);
+    padding: 0.2rem 1rem 0.35rem;
+    max-width: 500px;
+}
+
+.welcome-heading .names,
+.welcome-heading .ampersand {
+    font-family: 'Playfair Display', serif;
+    color: #ffffff;
+    font-weight: 400;
+}
+
+.welcome-cover-message {
+    color: #ffffff;
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    line-height: 1.45;
+    max-width: 500px;
+    margin: 2rem auto 0.7rem;
+}
+
+.welcome-subtitle {
+    color: rgba(255,255,255,.85);
+    font-family: 'Playfair Display', serif;
+    font-size: 0.82rem;
+    margin-bottom: 1.15rem;
+}
+
+/* Botones estilo referencia */
+.btn-wedding {
+    padding: 0.62rem 1.35rem;
+    border-radius: 6px;
+    border: none;
+    background: #4b3e7a !important;
+    color: #ffffff;
+    font-family: 'Playfair Display', serif;
+    font-size: 0.78rem;
+    font-weight: 400;
+    box-shadow: none;
+    transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+}
+
+.btn-wedding:hover {
+    transform: translateY(-1px);
+    background: #5b4b8c !important;
+    box-shadow: 0 5px 12px rgba(75,62,122,.16);
+}
+
+.modal-buttons .btn-wedding {
+    min-width: 160px;
+}
+
+/* ---------- Secciones ---------- */
+.countdown-section,
+.events-section,
+.gallery-section,
+.party-section,
+.gifts-section,
+.rsvp-section,
+.guest-section {
+    position: relative;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.countdown-section,
+.events-section,
+.party-section,
+.rsvp-section {
+    background: #e4d6f0;
+}
+
+.gallery-section,
+.gifts-section,
+.guest-section {
+    background: #ffffff;
+}
+
+.countdown-section,
+.events-section,
+.gallery-section,
+.party-section,
+.gifts-section,
+.rsvp-section {
+    padding: 4.4rem 1.1rem 4.2rem;
+}
+
+/* Flor entre cada sección, usando el PNG entregado */
+.guest-section::before,
+.events-section::before,
+.gallery-section::before,
+.party-section::before,
+.gifts-section::before,
+.rsvp-section::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: -43px;
+    width: 100%;
+    height: 86px;
+    background-image: url('floral-divider.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100% auto;
+    z-index: 10;
+    pointer-events: none;
+}
+
+/* Evita que el borde viejo genere otra división visual */
+.section-shadow-seam {
+    box-shadow: none;
+}
+
+.deco-divider {
+    display: none;
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 2.55rem);
+    line-height: 1.15;
+    font-weight: 400;
+    color: #4b3e7a;
+    margin-bottom: .55rem;
+}
+
+.section-subtitle {
+    font-family: 'Playfair Display', serif;
+    color: #8c79a7;
+    font-size: .82rem;
+    line-height: 1.45;
+    margin: 0 auto 2rem;
+}
+
+/* ---------- Countdown ---------- */
+.countdown-section {
+    padding-top: 3.6rem;
+    padding-bottom: 3.7rem;
+}
+
+.countdown-container {
+    gap: .7rem;
+    max-width: 390px;
+}
+
+.countdown-number {
+    font-family: 'Playfair Display', serif;
+    color: #4b3e7a;
+    font-size: clamp(2rem, 5vw, 2.45rem);
+    font-weight: 400;
+    margin-bottom: .25rem;
+}
+
+.countdown-label {
+    font-family: 'Playfair Display', serif;
+    color: #6e5b93;
+    font-size: .68rem;
+    letter-spacing: .05em;
+    text-transform: lowercase;
+}
+
+.countdown-separator {
+    color: #8c79a7;
+    font-size: 1.4rem;
+    align-self: center;
+}
+
+.hero-quote-card {
+    width: min(88%, 530px);
+    margin: 1.3rem auto 0;
+}
+
+.hero-quote-text,
+.hero-quote-ref {
+    font-family: 'Playfair Display', serif;
+    color: #6e5b93;
+}
+
+.hero-quote-text {
+    font-size: .8rem;
+    font-weight: 400;
+    text-transform: none;
+    line-height: 1.45;
+}
+
+.hero-quote-ref {
+    font-size: .72rem;
+    font-weight: 400;
+    letter-spacing: .04em;
+    text-transform: none;
+}
+
+/* ---------- Ceremonia: tarjeta como "Celebración" de referencia ---------- */
+.events-container {
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.event-card {
+    width: min(100%, 320px);
+    padding: 2rem 1.55rem;
+    background: #ffffff;
+    border: 1px solid #b998d0;
+    border-radius: 11px;
+    box-shadow: none;
+}
+
+.events-section .event-icon {
+    width: 38px;
+    height: 38px;
+    margin: 0 auto .7rem;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    filter: none;
+    animation: none;
+}
+
+.events-section .event-icon lord-icon {
+    width: 38px !important;
+    height: 38px !important;
+}
+
+.event-title {
+    font-family: 'Playfair Display', serif;
+    color: #4b3e7a;
+    font-size: 1.65rem;
+    font-weight: 400;
+    margin-bottom: 1.2rem;
+}
+
+.event-details {
+    margin-bottom: 1.1rem;
+}
+
+.event-details h4 {
+    font-family: 'Playfair Display', serif;
+    color: #a784c2;
+    font-size: .95rem;
+    font-weight: 400;
+    margin-bottom: .3rem;
+}
+
+.event-details p {
+    font-family: 'Playfair Display', serif;
+    color: #7d6b98;
+    font-size: .72rem;
+    line-height: 1.4;
+}
+
+.event-address {
+    font-size: .68rem !important;
+    margin-top: .15rem;
+}
+
+/* ---------- Galería / carrusel ---------- */
+.gallery-container {
+    max-width: 100%;
+}
+
+.camera-icon {
+    width: 3rem;
+    height: 3rem;
+    margin: .3rem auto 1.4rem;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    filter: none;
+    animation: none;
+}
+
+.gallery-section .camera-icon lord-icon {
+    width: 48px !important;
+    height: 48px !important;
+}
+
+.carousel-container {
+    max-width: 100%;
+    margin: 0 auto 1.2rem;
+}
+
+.carousel-track-container {
+    overflow: hidden;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.carousel-track {
+    align-items: stretch;
+}
+
+.carousel-item {
+    flex: 0 0 100%;
+    height: 330px;
+    padding: 10px;
+    background: #d9c8e4;
+    border: 1px solid #c5a8d8;
+    border-radius: 2px;
+    box-sizing: border-box;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #ffffff;
+    border: 1px solid rgba(75,62,122,.10);
+    display: block;
+}
+
+.carousel-btn {
+    width: 38px;
+    height: 38px;
+    background: rgba(255,255,255,.94);
+    color: #4b3e7a;
+    box-shadow: 0 3px 10px rgba(75,62,122,.16);
+    font-size: .95rem;
+}
+
+.carousel-prev { left: 8px; }
+.carousel-next { right: 8px; }
+
+.carousel-counter {
+    color: #8c79a7;
+    font-family: 'Playfair Display', serif;
+    font-size: .75rem;
+    margin-top: .8rem;
+}
+
+/* ---------- Fiesta / tarjetas ---------- */
+.party-container {
+    max-width: 100%;
+}
+
+.party-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 1.8rem;
+}
+
+.party-card {
+    padding: 1.35rem 1rem;
+    border: 1px solid #b998d0;
+    border-radius: 10px;
+    background: #ffffff;
+    box-shadow: none;
+}
+
+.party-card:hover {
+    box-shadow: 0 5px 14px rgba(75,62,122,.10);
+}
+
+.party-icon {
+    width: 52px;
+    height: 52px;
+    margin: 0 auto .8rem;
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    filter: none;
+    animation: none;
+}
+
+.party-icon .tie-icon {
+    width: 48px;
+    height: 48px;
+}
+
+.party-icon lord-icon {
+    width: 48px !important;
+    height: 48px !important;
+}
+
+.party-card h3 {
+    font-family: 'Playfair Display', serif;
+    color: #4b3e7a;
+    font-size: 1.05rem;
+    font-weight: 400;
+    margin-bottom: .7rem;
+}
+
+.party-card p {
+    font-family: 'Playfair Display', serif;
+    color: #8c79a7;
+    font-size: .72rem;
+    line-height: 1.45;
+    margin-bottom: 1rem;
+}
+
+.party-card .btn-wedding {
+    font-size: .7rem;
+    padding: .55rem 1rem;
+}
+
+/* ---------- Regalos / RSVP ---------- */
+.gifts-container,
+.rsvp-container {
+    max-width: 500px;
+}
+
+.gift-icon,
+.whatsapp-icon {
+    width: 52px;
+    height: 52px;
+    margin: .5rem auto 1.2rem;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    filter: none;
+    animation: none;
+}
+
+.gifts-section .gift-icon lord-icon {
+    width: 52px !important;
+    height: 52px !important;
+}
+
+.whatsapp-icon svg {
+    width: 42px;
+    height: 42px;
+}
+
+/* ---------- Footer ---------- */
+.footer {
+    max-width: 730px;
+    margin: 0 auto;
+    background: #4b3e7a;
+    color: #ffffff;
+    padding: 1.5rem 1rem;
+}
+
+.footer-content h3,
+.footer-date {
+    font-family: 'Playfair Display', serif;
+    color: #ffffff;
+}
+
+.footer-content h3 {
+    font-size: 1.15rem;
+    font-weight: 400;
+}
+
+.footer-date {
+    font-size: .72rem;
+    margin-top: .4rem;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+    .site-container,
+    .page-shell,
+    .hero-container,
+    .hero-wrapper,
+    .footer {
+        max-width: 100%;
+    }
+
+    .hero-split,
+    .hero-left {
+        height: 78vh;
+        min-height: 520px;
+        max-height: 680px;
+    }
+
+    .hero-left::before,
+    .hero-left::after {
+        height: 72px;
+    }
+
+    .countdown-section,
+    .events-section,
+    .gallery-section,
+    .party-section,
+    .gifts-section,
+    .rsvp-section {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .party-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .carousel-item {
+        height: min(78vw, 330px);
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-split,
+    .hero-left {
+        height: 76vh;
+        min-height: 470px;
+    }
+
+    .welcome-heading {
+        font-size: 2.45rem;
+    }
+
+    .welcome-cover-message {
+        font-size: .82rem;
+        max-width: 320px;
+        margin-top: 1.5rem;
+    }
+
+    .countdown-container {
+        gap: .35rem;
+    }
+
+    .countdown-number {
+        font-size: 1.9rem;
+    }
+
+    .countdown-separator {
+        font-size: 1.15rem;
+    }
+
+    .event-card {
+        width: min(100%, 310px);
+    }
+
+    .carousel-item {
+        height: 285px;
+        padding: 8px;
+    }
+
+    .carousel-btn {
+        width: 34px;
+        height: 34px;
+    }
+
+    .guest-section::before,
+    .events-section::before,
+    .gallery-section::before,
+    .party-section::before,
+    .gifts-section::before,
+    .rsvp-section::before {
+        height: 72px;
+        top: -36px;
+    }
+}
+
+/* Portada interior: texto de la invitación de referencia */
+.hero-content {
+    z-index: 3;
+}
+
+.hero-text {
+    max-width: 570px;
+    color: #ffffff;
+}
+
+.hero-text .date {
+    font-family: 'Playfair Display', serif;
+    font-size: .95rem;
+    line-height: 1.2;
+    margin-bottom: .65rem;
+    font-weight: 400;
+}
+
+.hero-text .names {
+    display: block;
+    width: min(100%, 410px);
+    margin: 0 auto .55rem;
+    padding: .18rem 1rem .28rem;
+    border-top: 1px solid rgba(255,255,255,.82);
+    border-bottom: 1px solid rgba(255,255,255,.82);
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.9rem, 7vw, 4rem);
+    line-height: 1.05;
+    font-weight: 400;
+    color: #ffffff;
+}
+
+.hero-xv-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.1rem, 3vw, 1.45rem);
+    color: rgba(255,255,255,.86);
+    margin-bottom: 2.2rem;
+}
+
+.hero-text .quote {
+    font-family: 'Playfair Display', serif;
+    font-style: normal;
+    font-size: clamp(.78rem, 2vw, .95rem);
+    line-height: 1.45;
+    font-weight: 400;
+    color: #ffffff;
+    margin: 0 auto;
+    max-width: 570px;
+}
+
+@media (max-width: 480px) {
+    .hero-text .names {
+        font-size: 2.65rem;
+    }
+
+    .hero-xv-title {
+        font-size: 1.05rem;
+        margin-bottom: 1.6rem;
+    }
+
+    .hero-text .quote {
+        font-size: .76rem;
+    }
+
+    .hero-message-break {
+        display: none;
+    }
+}
+
+/* La pantalla inicial de bienvenida queda limpia, como en la referencia. */
+.modal-overlay .welcome-hero::before {
+    display: none;
+}
