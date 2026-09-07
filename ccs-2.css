@@ -1565,6 +1565,7 @@ body {
 }
 
 /* Flor entre cada sección, usando el PNG entregado */
+.countdown-section::before,
 .guest-section::before,
 .events-section::before,
 .gallery-section::before,
@@ -2016,6 +2017,7 @@ body {
         height: 34px;
     }
 
+    .countdown-section::before,
     .guest-section::before,
     .events-section::before,
     .gallery-section::before,
@@ -2158,6 +2160,7 @@ body,
 }
 
 /* Las flores que separan las secciones son el PNG, no una línea */
+.countdown-section::before,
 .guest-section::before,
 .events-section::before,
 .gallery-section::before,
@@ -2392,6 +2395,7 @@ body,
         height: 78px;
     }
 
+    .countdown-section::before,
     .guest-section::before,
     .events-section::before,
     .gallery-section::before,
@@ -2413,6 +2417,7 @@ body,
         height: 68px;
     }
 
+    .countdown-section::before,
     .guest-section::before,
     .events-section::before,
     .gallery-section::before,
@@ -2682,7 +2687,7 @@ main {
     width: 100% !important;
     max-width: none !important;
     margin: 0 !important;
-    padding: 14px !important;
+    padding: 0 14px !important;
     background: #e4d6f0 !important;
     box-sizing: border-box !important;
 }
