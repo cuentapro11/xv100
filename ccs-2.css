@@ -2890,3 +2890,69 @@ main {
         height: 56px !important;
     }
 }
+
+/* ==========================================================
+   AJUSTE: FLORES DE PORTADA MÁS GRANDES + FLOR SOBRE LA LÍNEA
+   ENTRE LA PORTADA Y EL CONTEO REGRESIVO
+   ========================================================== */
+
+/* Ya no se superponen flores sobre la foto: se usan las dos franjas
+   reales, más grandes, en todos los tamaños de pantalla. */
+.hero-left::before,
+.hero-left::after {
+    display: none !important;
+    content: none !important;
+}
+
+.floral-divider--hero-top,
+.floral-divider--seam {
+    display: block !important;
+}
+
+/* Flor de arriba: lo primero que se ve al entrar, pegada al borde
+   superior de la página. */
+.floral-divider--hero-top {
+    position: relative;
+    z-index: 10;
+    height: 150px !important;
+}
+
+/* Flor "costura": queda fuera de .hero-wrapper (que tiene overflow
+   hidden) para poder sobresalir mitad hacia arriba —sobre el fondo de
+   la portada— y mitad hacia abajo —sobre el fondo del conteo—, con lo
+   que su centro cae justo encima de la línea que separa ambas secciones. */
+.floral-divider--seam {
+    position: relative;
+    z-index: 10;
+    height: 150px !important;
+    margin-top: -75px !important;
+    margin-bottom: -75px !important;
+    /* Al vivir fuera de .hero-wrapper hay que igualar manualmente el
+       ancho centrado de la columna (mismo criterio que .hero-wrapper). */
+    width: min(730px, calc(100% - 24px)) !important;
+    max-width: 730px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+@media (max-width: 768px) {
+    .floral-divider--hero-top {
+        height: 110px !important;
+    }
+    .floral-divider--seam {
+        height: 110px !important;
+        margin-top: -55px !important;
+        margin-bottom: -55px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .floral-divider--hero-top {
+        height: 92px !important;
+    }
+    .floral-divider--seam {
+        height: 92px !important;
+        margin-top: -46px !important;
+        margin-bottom: -46px !important;
+    }
+}
