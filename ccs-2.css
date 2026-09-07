@@ -2428,3 +2428,385 @@ body,
         padding: 8px 8px 30px !important;
     }
 }
+
+/* ==========================================================
+   AJUSTE FINAL DE PORTADA — FLORES SEPARADAS DE LA FOTO
+   ========================================================== */
+
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* La portada completa queda como una sola tarjeta centrada. */
+.hero-wrapper {
+    width: 100%;
+    max-width: 730px !important;
+    margin: 0 auto !important;
+    padding: 0;
+    background: var(--lavender-bg) !important;
+    overflow: hidden;
+}
+
+/* Las flores ocupan su propia franja: NO se mezclan con la fotografía. */
+.floral-divider {
+    position: relative;
+    width: 100%;
+    height: 92px !important;
+    margin: 0;
+    padding: 0;
+    background: var(--lavender-bg) !important;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.floral-divider img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center center;
+}
+
+/* La foto queda físicamente separada de las flores por el fondo lavanda. */
+.hero-container {
+    width: 100%;
+    max-width: none !important;
+    margin: 0;
+    padding: 0 14px !important;
+    box-sizing: border-box;
+    background: var(--lavender-bg) !important;
+}
+
+.hero-split.hero-split--single {
+    width: 100%;
+    height: 620px !important;
+    min-height: 620px !important;
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+    background: var(--lavender-bg) !important;
+}
+
+.hero-left {
+    width: 100%;
+    height: 620px !important;
+    min-height: 620px !important;
+    margin: 0;
+    border-radius: 0;
+    overflow: hidden;
+    background: var(--lavender-bg) !important;
+}
+
+.hero-left-bg {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+}
+
+/* Nada de flores superpuestas sobre la fotografía. */
+.hero-left::before,
+.hero-left::after {
+    display: none !important;
+    content: none !important;
+}
+
+/* El contenido continúa perfectamente centrado sobre la foto. */
+.hero-content {
+    inset: 0;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+/* ==========================================================
+   CARRUSEL — MARCO TIPO FOTOGRAFÍA ANTIGUA
+   ========================================================== */
+
+.carousel-item {
+    flex: 0 0 100% !important;
+    height: 430px !important;
+    padding: 10px 10px 48px !important;
+    box-sizing: border-box !important;
+    background: #fff !important;
+    border: 3px solid #8f70b5 !important;
+    border-bottom-width: 34px !important;
+    border-radius: 2px !important;
+    box-shadow: 0 3px 8px rgba(75, 62, 122, .12) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.carousel-item img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    object-position: center !important;
+    display: block !important;
+    border: 0 !important;
+    background: #fff !important;
+}
+
+/* ==========================================================
+   MÓVIL — INVITACIÓN CENTRADA
+   ========================================================== */
+
+@media (max-width: 768px) {
+    .hero-wrapper,
+    .page-shell {
+        width: calc(100% - 24px) !important;
+        max-width: 730px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    .site-container {
+        width: 100% !important;
+        max-width: none !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        box-sizing: border-box;
+    }
+
+    .hero-container {
+        width: 100% !important;
+        padding: 0 10px !important;
+    }
+
+    .hero-split.hero-split--single,
+    .hero-left {
+        height: 610px !important;
+        min-height: 610px !important;
+    }
+
+    .floral-divider {
+        height: 82px !important;
+    }
+
+    .carousel-item {
+        height: min(78vw, 390px) !important;
+        padding: 8px 8px 38px !important;
+        border-width: 3px !important;
+        border-bottom-width: 30px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-wrapper,
+    .page-shell {
+        width: calc(100% - 20px) !important;
+    }
+
+    .hero-container {
+        padding: 0 8px !important;
+    }
+
+    .hero-split.hero-split--single,
+    .hero-left {
+        height: 580px !important;
+        min-height: 580px !important;
+    }
+
+    .floral-divider {
+        height: 72px !important;
+    }
+
+    .carousel-item {
+        height: 340px !important;
+        padding: 7px 7px 36px !important;
+        border-width: 3px !important;
+        border-bottom-width: 28px !important;
+    }
+}
+
+/* ==========================================================
+   AJUSTES DEFINITIVOS: CENTRADO MÓVIL + PORTADA + FLORES
+   ========================================================== */
+
+html, body {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow-x: hidden !important;
+}
+
+main {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* La invitación queda como una columna central, también en móvil. */
+.hero-wrapper,
+.page-shell {
+    width: min(730px, calc(100% - 24px)) !important;
+    max-width: 730px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.site-container {
+    width: 100% !important;
+    max-width: 730px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+/* ---------- Portada ----------
+   Las flores son una franja independiente dentro de la portada.
+   La foto queda debajo, separada por el fondo lavanda.
+*/
+.hero-wrapper {
+    background: #e4d6f0 !important;
+    overflow: hidden !important;
+}
+
+.floral-divider {
+    width: 100% !important;
+    height: 92px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #e4d6f0 !important;
+    overflow: hidden !important;
+}
+
+.floral-divider img {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+}
+
+.hero-container {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 14px !important;
+    background: #e4d6f0 !important;
+    box-sizing: border-box !important;
+}
+
+.hero-split.hero-split--single,
+.hero-left {
+    width: 100% !important;
+    height: 700px !important;
+    min-height: 700px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    border-radius: 0 !important;
+}
+
+.hero-left-bg {
+    width: 100% !important;
+    height: 100% !important;
+    inset: 0 !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+}
+
+.hero-left::before,
+.hero-left::after {
+    display: none !important;
+    content: none !important;
+}
+
+/* ---------- Carrusel: foto tipo impresión antigua ---------- */
+.carousel-item {
+    border: 3px solid #8f70b5 !important;
+    border-bottom-width: 34px !important;
+    border-radius: 2px !important;
+    box-sizing: border-box !important;
+    background: #ffffff !important;
+}
+
+.carousel-item img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    object-position: center !important;
+    background: #ffffff !important;
+    border: 0 !important;
+}
+
+@media (max-width: 768px) {
+    .hero-wrapper,
+    .page-shell {
+        width: calc(100% - 24px) !important;
+        max-width: 730px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    .site-container {
+        width: 100% !important;
+        max-width: 730px !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    .hero-container {
+        padding: 10px !important;
+    }
+
+    .hero-split.hero-split--single,
+    .hero-left {
+        height: 650px !important;
+        min-height: 650px !important;
+    }
+
+    .floral-divider {
+        height: 82px !important;
+    }
+
+    .carousel-item {
+        height: min(78vw, 390px) !important;
+        padding: 8px 8px 38px !important;
+        border-width: 3px !important;
+        border-bottom-width: 30px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-wrapper,
+    .page-shell {
+        width: calc(100% - 20px) !important;
+    }
+
+    .hero-container {
+        padding: 8px !important;
+    }
+
+    .hero-split.hero-split--single,
+    .hero-left {
+        height: 620px !important;
+        min-height: 620px !important;
+    }
+
+    .floral-divider {
+        height: 72px !important;
+    }
+
+    .carousel-item {
+        height: 340px !important;
+        padding: 7px 7px 36px !important;
+        border-width: 3px !important;
+        border-bottom-width: 28px !important;
+    }
+}
