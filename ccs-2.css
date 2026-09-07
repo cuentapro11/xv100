@@ -2892,67 +2892,54 @@ main {
 }
 
 /* ==========================================================
-   AJUSTE: FLORES DE PORTADA MÁS GRANDES + FLOR SOBRE LA LÍNEA
-   ENTRE LA PORTADA Y EL CONTEO REGRESIVO
+   FLORES SUPERPUESTAS SOBRE LA FOTO DE PORTADA (todos los anchos)
+   Arriba: pegadas al borde superior, lo primero que se ve.
+   Abajo: montadas sobre la foto justo antes de que esta termine,
+   como una franja decorativa que "divide" visualmente la portada
+   del resto de la página (igual que en la imagen de referencia).
    ========================================================== */
 
-/* Ya no se superponen flores sobre la foto: se usan las dos franjas
-   reales, más grandes, en todos los tamaños de pantalla. */
+/* Las franjas de flores independientes (fuera de la foto) ya no se usan */
+.floral-divider--hero-top,
+.floral-divider--hero-bottom {
+    display: none !important;
+}
+
 .hero-left::before,
 .hero-left::after {
-    display: none !important;
-    content: none !important;
-}
-
-.floral-divider--hero-top,
-.floral-divider--seam {
     display: block !important;
+    content: "" !important;
+    position: absolute !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 140px !important;
+    background-image: url('floral-divider.png') !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    background-size: 100% auto !important;
+    z-index: 5 !important;
+    pointer-events: none !important;
 }
 
-/* Flor de arriba: lo primero que se ve al entrar, pegada al borde
-   superior de la página. */
-.floral-divider--hero-top {
-    position: relative;
-    z-index: 10;
-    height: 150px !important;
+.hero-left::before {
+    top: 0 !important;
 }
 
-/* Flor "costura": queda fuera de .hero-wrapper (que tiene overflow
-   hidden) para poder sobresalir mitad hacia arriba —sobre el fondo de
-   la portada— y mitad hacia abajo —sobre el fondo del conteo—, con lo
-   que su centro cae justo encima de la línea que separa ambas secciones. */
-.floral-divider--seam {
-    position: relative;
-    z-index: 10;
-    height: 150px !important;
-    margin-top: -75px !important;
-    margin-bottom: -75px !important;
-    /* Al vivir fuera de .hero-wrapper hay que igualar manualmente el
-       ancho centrado de la columna (mismo criterio que .hero-wrapper). */
-    width: min(730px, calc(100% - 24px)) !important;
-    max-width: 730px !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
+.hero-left::after {
+    bottom: 0 !important;
+    transform: rotate(180deg) !important;
 }
 
 @media (max-width: 768px) {
-    .floral-divider--hero-top {
-        height: 110px !important;
-    }
-    .floral-divider--seam {
-        height: 110px !important;
-        margin-top: -55px !important;
-        margin-bottom: -55px !important;
+    .hero-left::before,
+    .hero-left::after {
+        height: 100px !important;
     }
 }
 
 @media (max-width: 480px) {
-    .floral-divider--hero-top {
-        height: 92px !important;
-    }
-    .floral-divider--seam {
-        height: 92px !important;
-        margin-top: -46px !important;
-        margin-bottom: -46px !important;
+    .hero-left::before,
+    .hero-left::after {
+        height: 80px !important;
     }
 }
