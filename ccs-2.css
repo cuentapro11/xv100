@@ -1436,7 +1436,7 @@ body {
     left: 0;
     width: 100%;
     height: 78px;
-    background-image: url('floral-divider-trimmed.png');
+    background-image: url('floral-divider.png');
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 100% auto;
@@ -1565,7 +1565,6 @@ body {
 }
 
 /* Flor entre cada sección, usando el PNG entregado */
-.countdown-section::before,
 .guest-section::before,
 .events-section::before,
 .gallery-section::before,
@@ -1578,7 +1577,7 @@ body {
     top: -43px;
     width: 100%;
     height: 86px;
-    background-image: url('floral-divider-trimmed.png');
+    background-image: url('floral-divider.png');
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 100% auto;
@@ -2017,7 +2016,6 @@ body {
         height: 34px;
     }
 
-    .countdown-section::before,
     .guest-section::before,
     .events-section::before,
     .gallery-section::before,
@@ -2160,14 +2158,13 @@ body,
 }
 
 /* Las flores que separan las secciones son el PNG, no una línea */
-.countdown-section::before,
 .guest-section::before,
 .events-section::before,
 .gallery-section::before,
 .party-section::before,
 .gifts-section::before,
 .rsvp-section::before {
-    background-image: url('floral-divider-trimmed.png') !important;
+    background-image: url('floral-divider.png') !important;
     background-repeat: no-repeat !important;
     background-position: center center !important;
     background-size: 100% auto !important;
@@ -2395,7 +2392,6 @@ body,
         height: 78px;
     }
 
-    .countdown-section::before,
     .guest-section::before,
     .events-section::before,
     .gallery-section::before,
@@ -2417,7 +2413,6 @@ body,
         height: 68px;
     }
 
-    .countdown-section::before,
     .guest-section::before,
     .events-section::before,
     .gallery-section::before,
@@ -2687,7 +2682,7 @@ main {
     width: 100% !important;
     max-width: none !important;
     margin: 0 !important;
-    padding: 0 14px !important;
+    padding: 14px !important;
     background: #e4d6f0 !important;
     box-sizing: border-box !important;
 }
