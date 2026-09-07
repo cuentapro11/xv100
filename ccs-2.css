@@ -2810,3 +2810,83 @@ main {
         border-bottom-width: 28px !important;
     }
 }
+
+/* ==========================================================
+   AJUSTE FINAL MÓVIL: PANTALLA COMPLETA SIN BORDES,
+   FLORES SUPERPUESTAS SOBRE LA FOTO DE PORTADA
+   Y MARCO DEL CARRUSEL EN MORADO (sin relleno blanco)
+   ========================================================== */
+
+/* El marco del carrusel deja de tener relleno blanco: todo el marco
+   (el borde y el fondo que queda detrás de la foto cuando no lo cubre
+   por completo) pasa a ser del mismo morado del borde. */
+.carousel-item,
+.carousel-item img {
+    background: #8f70b5 !important;
+}
+
+@media (max-width: 768px) {
+    /* La página ocupa el 100% del ancho de la pantalla, sin margen
+       lateral ni "borde" alrededor de la invitación. */
+    .hero-wrapper,
+    .page-shell {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    .site-container {
+        max-width: 100% !important;
+    }
+
+    .hero-container {
+        padding: 0 !important;
+    }
+
+    /* Se ocultan las franjas de flores independientes: en su lugar las
+       flores quedan superpuestas directamente sobre la fotografía,
+       pegadas arriba del todo y justo antes de que termine la foto,
+       igual que en la imagen de referencia. */
+    .floral-divider--hero-top,
+    .floral-divider--hero-bottom {
+        display: none !important;
+    }
+
+    .hero-left::before,
+    .hero-left::after {
+        display: block !important;
+        content: "" !important;
+        position: absolute !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 70px !important;
+        background-image: url('floral-divider.png') !important;
+        background-repeat: no-repeat !important;
+        background-position: center center !important;
+        background-size: 100% auto !important;
+        z-index: 5 !important;
+        pointer-events: none !important;
+    }
+
+    .hero-left::before {
+        top: 0 !important;
+    }
+
+    .hero-left::after {
+        bottom: 0 !important;
+        transform: rotate(180deg) !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-wrapper,
+    .page-shell {
+        width: 100% !important;
+    }
+
+    .hero-left::before,
+    .hero-left::after {
+        height: 56px !important;
+    }
+}
